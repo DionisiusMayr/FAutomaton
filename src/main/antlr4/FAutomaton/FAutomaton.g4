@@ -49,4 +49,4 @@ LETRA			: ('a' .. 'z')
 fragment
 NUMERO			: ('0' .. '9');
 
-ERRO            : . {stop("Linha " + getLine() + ": " + getText() + " - simbolo nao identificado" + System.lineSeparator());};
+ERRO            : . {stop(getLine() + ": Erro lexico: " + getText() + " - simbolo nao identificado" + System.lineSeparator());};
