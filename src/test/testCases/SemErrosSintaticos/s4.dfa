@@ -1,0 +1,1 @@
+/* Sem erros */automato A4 { alfabeto { 0, 1 } /*estados*/ estados { s1*, s2 } transicoes /*transicoes*/{ s1 { 0 -> s2, 1 -> s1 } s2 { 0 -> s1, 1 -> s2 } }}

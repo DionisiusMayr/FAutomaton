@@ -1,0 +1,14 @@
+/* Sem transições */
+
+automato A3 {
+	alfabeto {
+		0, 1
+	}
+
+	estados {
+		s1*, s2
+	}
+
+	transicoes {
+	}
+}

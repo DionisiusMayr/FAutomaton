@@ -1,0 +1,13 @@
+automato A7 {
+    alfabeto {
+        a, b
+    }
+
+    estados {
+        q, w
+    }
+
+    transicoes {
+
+    }
+}

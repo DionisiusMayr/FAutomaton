@@ -1,8 +1,6 @@
-/* Sem erros */
-
-automato A1 {
+automato L1 {
 	alfabeto {
-		0, 1
+		0a, 1
 	}
 
 	estados {
