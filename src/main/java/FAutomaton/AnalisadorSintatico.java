@@ -33,8 +33,8 @@ class AnalisadorSintatico {
         if(erros.length() == 0)
             return "";
         else {
-            erros.append("Fim da compilacao");
-            erros.append(System.lineSeparator());
+//            erros.append("Fim da compilacao");
+//            erros.append(System.lineSeparator());
 
             return new String(erros);
         }

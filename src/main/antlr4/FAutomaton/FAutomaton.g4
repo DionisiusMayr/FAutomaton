@@ -11,12 +11,12 @@ options {
     }
 }
 
-automato		: 'automato' NOME '{' alfabeto listaEstados listaTransicoes '}';
+automato		: 'automato' (LETRA (LETRA | NUMERO)*) '{' alfabeto listaEstados listaTransicoes '}';
 
 /*** Alfabeto ***/
 alfabeto		: 'alfabeto' '{' listaSimbolos '}';
 
-listaSimbolos	: SIMBOLO (',' SIMBOLO)*;
+listaSimbolos	: (LETRA | NUMERO) (',' (LETRA | NUMERO))*;
 
 /*** Estados ***/
 listaEstados	: 'estados' '{' (estadoSF (',' estadoSF)*)? '}';  // É possível não ter nenhum estado,
@@ -26,31 +26,24 @@ listaEstados	: 'estados' '{' (estadoSF (',' estadoSF)*)? '}';  // É possível n
 estadoSF		: estadoSimples
 				| estadoFinal;
 
-estadoSimples	: NOME;
+estadoSimples	: (LETRA (LETRA | NUMERO)*);
 
-estadoFinal		: NOME '*';
+estadoFinal		: (LETRA (LETRA | NUMERO)*) '*';
 
 /*** Transições ***/
 listaTransicoes : 'transicoes' '{' transicao* '}'; // É possível não ter transições em um autômato
 
-transicao		: NOME '{' transicaoParcial (',' transicaoParcial)* '}';
+transicao		: (LETRA (LETRA | NUMERO)*) '{' transicaoParcial (',' transicaoParcial)* '}';
 
-transicaoParcial: SIMBOLO '->' NOME;
+transicaoParcial: (LETRA | NUMERO) '->' (LETRA (LETRA | NUMERO)*);
 
 WS	            : (' ' | '\t' | '\r' | '\n') -> skip;
 
-SIMBOLO			: LETRA
-				| NUMERO;
-
-NOME			: LETRA (LETRA | NUMERO)*;
-
 COMENTARIO      : '/*' (.)*? '*/' -> skip;
 
-fragment
 LETRA			: ('a' .. 'z')
 				| ('A' .. 'Z');
 
-fragment
 NUMERO			: ('0' .. '9');
 
 ERRO            : . {stop(getLine() + ": Erro lexico: " + getText() + " - simbolo nao identificado" + System.lineSeparator());};

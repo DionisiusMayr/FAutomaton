@@ -44,7 +44,6 @@ public class AnalisadorSintaticoTest extends TestCase {
         assertEquals(analisadorSintatico.analisaArquivo(pathSemErrosSintaticos + "s6.dfa"), "");
     }
 
-    // TODO: Falhando
     // Testa um autômato com estados de uma única letra
     public void testSemErro7() throws Exception {
         assertEquals(analisadorSintatico.analisaArquivo(pathSemErrosSintaticos + "s7.dfa"), "");
@@ -52,12 +51,31 @@ public class AnalisadorSintaticoTest extends TestCase {
 
     /*
         COM ERROS LÉXICOS
-
+        Espera-se que o compilador retorne uma string informando a linha onde ocorre o erro e qual símbolo está causando este erro léxico.
     */
 
-    // TODO: Está gerando um erro sintático na verdade
-    // Testa um identificador começando com número seguido de letra.
+    // Símbolo inválido no símbolo do alfabeto
     public void testComErroLexico1() throws Exception {
-        assertEquals(analisadorSintatico.analisaArquivo(pathErrosLexicos + "l1.dfa"), "");
+        assertEquals(analisadorSintatico.analisaArquivo(pathErrosLexicos + "l1.dfa"), "3: Erro lexico: @ - simbolo nao identificado\n");
+    }
+
+    // Símbolo inválido no nome do estado
+    public void testComErroLexico2() throws Exception {
+        assertEquals(analisadorSintatico.analisaArquivo(pathErrosLexicos + "l2.dfa"), "7: Erro lexico: $ - simbolo nao identificado\n");
+    }
+
+    // Símbolo inválido no estado alvo da transição
+    public void testComErroLexico3() throws Exception {
+        assertEquals(analisadorSintatico.analisaArquivo(pathErrosLexicos + "l3.dfa"), "12: Erro lexico: ^ - simbolo nao identificado\n");
+    }
+
+    // Símbolo inválido no símbolo de entrada para a transição
+    public void testComErroLexico4() throws Exception {
+        assertEquals(analisadorSintatico.analisaArquivo(pathErrosLexicos + "l4.dfa"), "13: Erro lexico: ( - simbolo nao identificado\n");
+    }
+
+    // Múltiplos erros léxicos e uma chave faltando, acusa apenas o primeiro erro léxico e para a execução
+    public void testComErroLexico5() throws Exception {
+        assertEquals(analisadorSintatico.analisaArquivo(pathErrosLexicos + "l5.dfa"), "7: Erro lexico: $ - simbolo nao identificado\n");
     }
 }

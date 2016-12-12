@@ -1,16 +1,16 @@
 automato L1 {
 	alfabeto {
-		@0, 1
+		0, 1
 	}
 
 	estados {
-		s1*, s2
+		s*, s2
 	}
 
 	transicoes {
 		s1 {
 			0 -> s2,
-			1 -> s1
+			( -> s1
 		}
 
 		s2 {
