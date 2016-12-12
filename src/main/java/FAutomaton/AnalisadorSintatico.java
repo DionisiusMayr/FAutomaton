@@ -16,7 +16,7 @@ class AnalisadorSintatico {
             @Override
             public void syntaxError(Recognizer<?, ?> recognizer, Object offendingSymbol, int line, int col, String msg, RecognitionException e) {
                 Token t = (Token) offendingSymbol;
-                String erro = String.format("%d : erro sintatico proximo a %s", line, !t.getText().equals("<EOF>") ? t.getText() : "EOF");
+                String erro = String.format("%d : Erro sintatico proximo a '%s'", line, !t.getText().equals("<EOF>") ? t.getText() : "EOF");
 
                 throw new ParseCancellationException(erro + System.lineSeparator());
             }

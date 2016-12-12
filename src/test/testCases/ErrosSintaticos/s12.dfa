@@ -1,0 +1,13 @@
+automato A {
+    alfabeto {
+        a, b c d e
+    }
+
+    estados {
+        q, w x y z
+    }
+
+    transicoes {
+
+    }
+}

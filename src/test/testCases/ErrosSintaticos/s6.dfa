@@ -1,0 +1,19 @@
+automato A1 {
+	alfabeto
+
+	estados {
+		s1*, s2
+	}
+
+	transicoes {
+		s1 {
+			0 -> s2,
+			1 -> s1
+		}
+
+		s2 {
+			0 -> s1,
+			1 -> s2
+		}
+	}
+}
