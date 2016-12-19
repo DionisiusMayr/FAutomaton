@@ -5,7 +5,7 @@ import javax.sound.midi.SysexMessage;
 public class Main {
     private static AnalisadorSintatico sintatico;
     private static AnalisadorSemantico semantico;
-    private static String arquivo = "/home/nicolezk/IdeaProjects/FAutomaton/src/test/testCases/ErrosSemanticos/m1.dfa";
+    private static String arquivo = "./src/test/testCases/ErrosSemanticos/m1.dfa";
 
     public static void main(String[] args) throws Exception {
         sintatico = new AnalisadorSintatico();
@@ -14,10 +14,18 @@ public class Main {
             System.out.println(errosSintaticos);
         }
         else {
-            System.out.println("Arquvos sem erros Sintaticos.");
+            System.out.println("Arquivo sem erros Sintaticos.\n");
 
             semantico = new AnalisadorSemantico();
-            String errosSemanticos = semantico.analisaArquivo(arquivo);
+            Par<String, String> pew = semantico.analisaArquivo(arquivo);
+            String errosSemanticos  = pew.a;
+            String warnings         = pew.b;
+
+            if (!warnings.isEmpty()) {
+                System.out.println("Warnings:");
+                System.out.println(warnings);
+            }
+
             if(!errosSemanticos.equals("")) { // Se houveram erros semânticos
                 System.out.println(errosSemanticos);
             }

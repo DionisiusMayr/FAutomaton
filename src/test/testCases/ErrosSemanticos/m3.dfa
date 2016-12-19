@@ -1,10 +1,10 @@
 automato A1 {
 	alfabeto {
-		0, 1, 2, 3, 1
+		0, 1, 2, 3
 	}
 
 	estados {
-		s1*, s2
+		s1*, s2, s1
 	}
 
 	transicoes {

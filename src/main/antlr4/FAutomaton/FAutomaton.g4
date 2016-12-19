@@ -16,7 +16,7 @@ automato		: 'automato' NOME '{' alfabeto listaEstados listaTransicoes '}';
 /*** Alfabeto ***/
 alfabeto		: 'alfabeto' '{' listaSimbolos '}';
 
-listaSimbolos	: SIMBOLO (',' SIMBOLO)*;
+listaSimbolos	: (SIMBOLO (',' SIMBOLO)*)?;
 
 /*** Estados ***/
 listaEstados	: 'estados' '{' (estadoSF (',' estadoSF)*)? '}';  // É possível não ter nenhum estado,
