@@ -1,7 +1,7 @@
 package FAutomaton;
 
 import junit.framework.TestCase;
-
+// TODO: Inverter a ordem dos parametro do assert
 public class AnalisadorSintaticoTest extends TestCase {
     private AnalisadorSintatico analisadorSintatico     = new AnalisadorSintatico();
 
@@ -45,9 +45,10 @@ public class AnalisadorSintaticoTest extends TestCase {
     }
 
     // Testa um autômato com estados de uma única letra
-    public void testSemErro7() throws Exception {
-        assertEquals(analisadorSintatico.analisaArquivo(pathSemErrosSintaticos + "s7.dfa"), "");
-    }
+    // Note: Nào é mais aceito um estado com uma única letra
+//    public void testSemErro7() throws Exception {
+//        assertEquals(analisadorSintatico.analisaArquivo(pathSemErrosSintaticos + "s7.dfa"), "");
+//    }
 
     /*
         COM ERROS LÉXICOS
@@ -79,6 +80,8 @@ public class AnalisadorSintaticoTest extends TestCase {
         assertEquals(analisadorSintatico.analisaArquivo(pathErrosLexicos + "l5.dfa"), "7: Erro lexico: $ - simbolo nao identificado\n");
     }
 
+    //TODO Nome de automato invalido
+
     /*
         COM ERROS SINTÁTICOS
         Espera-se que o compilador retorne uma string informando a linha onde ocorre o erro e
@@ -86,7 +89,7 @@ public class AnalisadorSintaticoTest extends TestCase {
 
     // Palavra "automato" com erro de digitação
     public void testComErroSintatico1() throws Exception {
-        assertEquals(analisadorSintatico.analisaArquivo(pathErrosSintaticos + "s1.dfa"), "1 : Erro sintatico proximo a 'a'\n");
+        assertEquals(analisadorSintatico.analisaArquivo(pathErrosSintaticos + "s1.dfa"), "1 : Erro sintatico proximo a 'automat'\n");
     }
 
     // Autômato sem nome
@@ -101,7 +104,7 @@ public class AnalisadorSintaticoTest extends TestCase {
 
     // Palavra "alfabeto" com erro de digitação
     public void testComErroSintatico4() throws Exception {
-        assertEquals(analisadorSintatico.analisaArquivo(pathErrosSintaticos + "s4.dfa"), "2 : Erro sintatico proximo a 'a'\n");
+        assertEquals(analisadorSintatico.analisaArquivo(pathErrosSintaticos + "s4.dfa"), "2 : Erro sintatico proximo a 'alfabeta'\n");
     }
 
     // Autômato sem chave depois do alfabeto
@@ -156,7 +159,7 @@ public class AnalisadorSintaticoTest extends TestCase {
 
     // Separação de estados sem vírgula
     public void testComErroSintatico15() throws Exception {
-        assertEquals(analisadorSintatico.analisaArquivo(pathErrosSintaticos + "s15.dfa"), "7 : Erro sintatico proximo a 's'\n");
+        assertEquals(analisadorSintatico.analisaArquivo(pathErrosSintaticos + "s15.dfa"), "7 : Erro sintatico proximo a 's2'\n");
     }
 
     // Separação de transições sem vírgula

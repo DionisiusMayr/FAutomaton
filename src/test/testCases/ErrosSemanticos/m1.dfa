@@ -1,6 +1,6 @@
-automato L1 {
+automato A1 {
 	alfabeto {
-		0, 1
+		0, 1, 2, 3
 	}
 
 	estados {
@@ -9,7 +9,7 @@ automato L1 {
 
 	transicoes {
 		s1 {
-			0 -> ^,
+			0 -> s2,
 			1 -> s1
 		}
 

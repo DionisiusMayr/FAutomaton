@@ -1,4 +1,4 @@
-automato A {
+automato A1 {
     alfabeto {
         a, b c d e
     }

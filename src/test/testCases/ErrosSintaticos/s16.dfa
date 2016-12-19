@@ -9,7 +9,7 @@ automato A1 {
 
 	transicoes {
 		s1 {
-			0 -> s2 //TODO identificar o erro de "falta de vírgula"
+			0 -> s2 /*TODO identificar o erro de "falta de vírgula"*/
 			1 -> s1
 		}
 
