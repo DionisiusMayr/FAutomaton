@@ -27,4 +27,6 @@ class AutomatoInfo {
     void insereEstadoFinal(String estado) {
         estadosFinais.add(estado);
     }
+
+    boolean existeEstadoFinal() { return !(estadosFinais.isEmpty()); }
 }
