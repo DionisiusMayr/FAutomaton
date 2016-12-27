@@ -4,16 +4,16 @@ import java.util.HashSet;
 import java.util.Set;
 
 class AutomatoInfo {
-    private Set<String> simbolos = new HashSet<>();
+    private Set<String> alfabeto = new HashSet<>();
     private Set<String> estados  = new HashSet<>();
     private Set<String> estadosFinais = new HashSet<>();
 
     boolean existeSimbolo(String simbolo) {
-        return simbolos.contains(simbolo);
+        return alfabeto.contains(simbolo);
     }
 
     void insereSimbolo(String simbolo) {
-        simbolos.add(simbolo);
+        alfabeto.add(simbolo);
     }
 
     boolean existeEstado(String estado) {
