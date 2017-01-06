@@ -4,7 +4,7 @@ automato A7 {
     }
 
     estados {
-        q, w
+        q1, w1
     }
 
     transicoes {

@@ -30,7 +30,7 @@ public class GeradorDeCodigoCpp extends FAutomatonBaseVisitor<String> {
                 "\tset<string>\testadosFinais;\n" +
                 "\tstring \t\testadoAtual;\n" +
                 "\tmap<pair<string, char>, string> transicao;\n" +
-                "\t\n" +
+                "\n" +
                 "\t/* Le a fita de entrada */\n" +
                 "\tstring entrada;\n" +
                 "\tcin >> entrada;\n\n";
@@ -44,7 +44,7 @@ public class GeradorDeCodigoCpp extends FAutomatonBaseVisitor<String> {
         //estado inicial
         codigo += "\t/* Estado inicial */\n" +
                 "\testadoAtual = \"" + estadoInicial + "\";\n" +
-                "\t\n";
+                "\n";
 
         //conjunto de estados finais
         codigo += "\t/* Conjunto de estados finais */\n" + estadosFinais + "\n";
@@ -56,7 +56,7 @@ public class GeradorDeCodigoCpp extends FAutomatonBaseVisitor<String> {
         codigo += "\t/* Para cada simbolo da fita de entrada, realize a transicao. */\n" +
                 "\tfor(const char & c : entrada) {\n" +
                 "\t\tif((alfabeto.find(c) != alfabeto.cend()) || (transicao.find(make_pair(estadoAtual, c)) != transicao.cend()))\n" +
-                "\t\t\t/* Funcao de transicao, toma como parametro o estado atual e o \n" +
+                "\t\t\t/* Funcao de transicao, toma como parametro o estado atual e o\n" +
                 "\t\t\t * simbolo lido e atualiza o estado atual com o estado de destino */\n" +
                 "\t\t\testadoAtual = transicao[make_pair(estadoAtual, c)];\n" +
                 "\t\telse {\n" +
@@ -65,7 +65,7 @@ public class GeradorDeCodigoCpp extends FAutomatonBaseVisitor<String> {
                 "\t\t\tbreak;\n" +
                 "\t\t}\n" +
                 "\t}\n" +
-                "\t\n" +
+                "\n" +
                 "\tif(recusa || (estadosFinais.find(estadoAtual) == estadosFinais.cend()))\n" +
                 "\t\tcout << \"Rejeita: A cadeia \" << entrada << \" nao pertence a linguagem.\" << endl;\n" +
                 "\telse\n" +
@@ -89,20 +89,21 @@ public class GeradorDeCodigoCpp extends FAutomatonBaseVisitor<String> {
 
     @Override
     public String visitListaEstados(FAutomatonParser.ListaEstadosContext ctx) {
-        estadoInicial = ctx.estadoInicial.getText();
-        if (estadoInicial.endsWith("*"))
-            estadoInicial = estadoInicial.substring(0, estadoInicial.length() - 1);
+        if(!ctx.getText().equals("estados{}")) {
+            estadoInicial = ctx.estadoInicial.getText();
+            if (estadoInicial.endsWith("*"))
+                estadoInicial = estadoInicial.substring(0, estadoInicial.length() - 1);
 
-        String texto = ctx.getText();
-        texto = texto.substring(8, texto.length() - 1);
-        String[] estados = texto.split(",");
-        for (String estado : estados) {
-            if (estado.endsWith("*")) { //se é um estado final
-                estado = estado.substring(0, estado.length() - 1);
-                estadosFinais += "\testadosFinais.insert(\"" + estado + "\");\n";
+            String texto = ctx.getText();
+            texto = texto.substring(8, texto.length() - 1);
+            String[] estados = texto.split(",");
+            for (String estado : estados) {
+                if (estado.endsWith("*")) { //se é um estado final
+                    estado = estado.substring(0, estado.length() - 1);
+                    estadosFinais += "\testadosFinais.insert(\"" + estado + "\");\n";
+                }
             }
         }
-
         return super.visitListaEstados(ctx);
     }
 
