@@ -52,7 +52,7 @@ public class AnalisadorSemanticoTest extends TestCase {
         assertEquals("", analisadorSemantico.analisaArquivo(pathErrosSemanticos + "m6.dfa").a);
     }
     public void testSemanticoWarning6() throws Exception {
-        assertEquals("Automato 'A1' sem estado final.\n", analisadorSemantico.analisaArquivo(pathErrosSemanticos + "m6.dfa").b);
+        assertEquals("Automato 'A1' sem estados finais.\n", analisadorSemantico.analisaArquivo(pathErrosSemanticos + "m6.dfa").b);
     }
 
     // Automato sem transicoes, gerando um warning
@@ -73,7 +73,10 @@ public class AnalisadorSemanticoTest extends TestCase {
 
     // Automato sem estados, mas com transicoes, gerando um warning e um erro
     public void testSemanticoErro9() throws Exception {
-        assertEquals("11: Estado 's2' nao pertence ao conjunto de estados.\n", analisadorSemantico.analisaArquivo(pathErrosSemanticos + "m9.dfa").a);
+        assertEquals("11: Estado 's2' nao pertence ao conjunto de estados.\n" +
+                "12: Estado 's1' nao pertence ao conjunto de estados.\n" +
+                "16: Estado 's1' nao pertence ao conjunto de estados.\n" +
+                "17: Estado 's2' nao pertence ao conjunto de estados.\n", analisadorSemantico.analisaArquivo(pathErrosSemanticos + "m9.dfa").a);
     }
     public void testSemanticoWarning9() throws Exception {
         assertEquals("Automato 'A1' sem estados.\n", analisadorSemantico.analisaArquivo(pathErrosSemanticos + "m9.dfa").b);

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 class AnalisadorSemantico extends FAutomatonBaseVisitor<String> {
     private String          erros       = "";
     private String          warnings    = "";
-    private AutomatoInfo    ai          = new AutomatoInfo();
+    private AutomatoInfo    ai;
 
     Par<String, String> analisaArquivo(String fileLocation) throws Exception {
         ANTLRInputStream  input  = new ANTLRFileStream(fileLocation);
@@ -16,6 +16,10 @@ class AnalisadorSemantico extends FAutomatonBaseVisitor<String> {
         FAutomatonParser  parser = new FAutomatonParser(tokens);
 
         visit(parser.automato());
+
+        // TODO remover essas duas linhas, somente debug
+        System.out.println("Warnings:\n" + warnings);
+        System.out.println("Erros:\n" + erros);
 
         return new Par(erros, warnings);
     }
@@ -27,6 +31,14 @@ class AnalisadorSemantico extends FAutomatonBaseVisitor<String> {
         return ctx.getStart().getLine();
     }
 
+    @Override
+    public String visitAutomato(FAutomatonParser.AutomatoContext ctx) {
+        String nome = ctx.NOME().getText();
+        ai = new AutomatoInfo(nome);            // Cria uma estrutura para armazenar as informações do autômato,
+                                                // como seus estados e transições.
+
+        return super.visitAutomato(ctx);
+    }
 
     @Override
     public String visitListaSimbolos(FAutomatonParser.ListaSimbolosContext ctx) {
@@ -83,7 +95,7 @@ class AnalisadorSemantico extends FAutomatonBaseVisitor<String> {
         String s = super.visitListaEstados(ctx);
 
         if(!ai.existeEstadoFinal())
-            warnings += "Automato sem estados finais\n"; //TODO melhorar esse warning
+            warnings += "Automato \'" + ai.getNome() + "\' sem estados finais.\n"; //TODO melhorar esse warning
 
         return s;
     }
@@ -93,10 +105,13 @@ class AnalisadorSemantico extends FAutomatonBaseVisitor<String> {
     public String visitTransicaoParcial(FAutomatonParser.TransicaoParcialContext ctx) {
         String s = ctx.SIMBOLO().getText();
         String e = ctx.NOME().getText();
+
         if(!ai.existeSimbolo(s))
             erros += getLine(ctx) + ": Simbolo '" + s + "' nao pertence ao alfabeto.\n";
+
         if(!ai.existeEstado(e))
             erros += getLine(ctx) + ": Estado '" + e + "' nao pertence ao conjunto de estados.\n";
+
         return super.visitTransicaoParcial(ctx);
     }
 }
