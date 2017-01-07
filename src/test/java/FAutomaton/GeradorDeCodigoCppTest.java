@@ -9,10 +9,10 @@ import java.util.List;
 
 public class GeradorDeCodigoCppTest extends TestCase {
     private AnalisadorSemantico analisadorSemantico = new AnalisadorSemantico();
-    private GeradorDeCodigoCpp geradorDeCodigoCpp = new GeradorDeCodigoCpp();
+    private GeradorDeCodigoCpp geradorDeCodigoCpp = new GeradorDeCodigoCpp(analisadorSemantico.getAI());
 
-    private final String pathSemErrosSintaticos = "src/test/testCases/SemErrosSintaticos/"; //TODO fazer test cases para sem erros sintáticos ou semânticos
-    private final String pathSaidasCorretas = "src/test/testCases/SaidaCodigoCpp/";
+    private final String pathSemErrosSintaticos = "src/test/testCases/SemErrosSintaticos/"; //TODO mudar para "sem erros"
+    private final String pathSaidasCorretas     = "src/test/testCases/SaidaCodigoCpp/";
 
     private String leArquivo(String nomeArquivo) throws Exception{
         File f = new File(pathSaidasCorretas + nomeArquivo);

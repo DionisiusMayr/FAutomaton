@@ -3,12 +3,21 @@ package FAutomaton;
 import org.antlr.v4.runtime.*;
 
 public class GeradorDeCodigoCpp extends FAutomatonBaseVisitor<String> {
-    private String          codigo          = "";
-    private String          alfabeto        = "";
-    private String          estadoInicial   = "";
-    private String          estadosFinais   = "";
-    private String          transicoes      = "";
-    //private AutomatoInfo    ai;
+    private String          codigo;
+    private String          alfabeto;
+    private String          estadoInicial;
+    private String          estadosFinais;
+    private String          transicoes;
+    private AutomatoInfo    ai;
+
+    GeradorDeCodigoCpp(AutomatoInfo a) {
+        ai              = a;    // Recebe todas as informações necessárias a respeito do autômato.
+        codigo          = "";
+        alfabeto        = "";
+        estadoInicial   = "";
+        estadosFinais   = "";
+        transicoes      = "";
+    }
 
     String geraCodigoCpp(String fileLocation/*, AutomatoInfo _ai*/) throws Exception {
         //ai = _ai;
@@ -17,6 +26,8 @@ public class GeradorDeCodigoCpp extends FAutomatonBaseVisitor<String> {
         FAutomatonLexer   lexer  = new FAutomatonLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         FAutomatonParser  parser = new FAutomatonParser(tokens);
+
+        estadoInicial = ai.getEstadoInicial();
 
         codigo += "#include <iostream>\n" +
                 "#include <set>\n" +
@@ -87,39 +98,10 @@ public class GeradorDeCodigoCpp extends FAutomatonBaseVisitor<String> {
         return super.visitListaSimbolos(ctx);
     }
 
-    @Override
-    public String visitListaEstados(FAutomatonParser.ListaEstadosContext ctx) {
-        if(!ctx.getText().equals("estados{}")) {
-            estadoInicial = ctx.estadoInicial.getText();
-            if (estadoInicial.endsWith("*"))
-                estadoInicial = estadoInicial.substring(0, estadoInicial.length() - 1);
+    //  foreach
+    //    estadosFinais += "\testadosFinais.insert(\"" + estado + "\");\n";
 
-            String texto = ctx.getText();
-            texto = texto.substring(8, texto.length() - 1);
-            String[] estados = texto.split(",");
-            for (String estado : estados) {
-                if (estado.endsWith("*")) { //se é um estado final
-                    estado = estado.substring(0, estado.length() - 1);
-                    estadosFinais += "\testadosFinais.insert(\"" + estado + "\");\n";
-                }
-            }
-        }
-        return super.visitListaEstados(ctx);
-    }
-
-    @Override
-    public String visitTransicao(FAutomatonParser.TransicaoContext ctx) {
-        String[] particoes = ctx.getText().split("\\{");
-        String estadoSaida = particoes[0];
-        particoes[1] = particoes[1].substring(0, particoes[1].length() - 1);
-        particoes = particoes[1].split(",");
-
-        for (String transicao : particoes) {
-            String[] aux = transicao.split("\\-\\>");
-
-            transicoes += "\ttransicao[make_pair(\"" + estadoSaida + "\", '" + aux[0] + "')] = \"" + aux[1] + "\";\n";
-        }
-
-        return super.visitTransicao(ctx);
-    }
+//     for (String transicao : particoes) {
+//        String[] aux = transicao.split("\\-\\>");
+//        transicoes += "\ttransicao[make_pair(\"" + estadoSaida + "\", '" + aux[0] + "')] = \"" + aux[1] + "\";\n";
 }

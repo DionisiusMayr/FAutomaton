@@ -9,6 +9,8 @@ class AnalisadorSemantico extends FAutomatonBaseVisitor<String> {
     private String          warnings    = "";
     private AutomatoInfo    ai;
 
+    // TODO
+    // Seta o AutomatoInfo
     Par<String, String> analisaArquivo(String fileLocation) throws Exception {
         ANTLRInputStream  input  = new ANTLRFileStream(fileLocation);
         FAutomatonLexer   lexer  = new FAutomatonLexer(input);
@@ -22,6 +24,10 @@ class AnalisadorSemantico extends FAutomatonBaseVisitor<String> {
         System.out.println("Erros:\n" + erros);
 
         return new Par(erros, warnings);
+    }
+
+    AutomatoInfo getAI() {
+        return ai;
     }
 
     /*
@@ -90,7 +96,11 @@ class AnalisadorSemantico extends FAutomatonBaseVisitor<String> {
     public String visitListaEstados(FAutomatonParser.ListaEstadosContext ctx) {
         if(ctx.getText().equals("estados{}"))
             warnings += getLine(ctx) + ": \'" + ai.getNome() + "\' com conjunto de estados vazio.\n";
-        //TODO definir se o nome do automato sera mostrado neste warning
+        else {
+            ai.setEstadoInicial(ctx.estadoInicial.getText());
+        }
+
+
 
         String s = super.visitListaEstados(ctx);
 
@@ -113,6 +123,21 @@ class AnalisadorSemantico extends FAutomatonBaseVisitor<String> {
             erros += getLine(ctx) + ": Estado '" + e + "' nao pertence ao conjunto de estados.\n";
 
         return super.visitTransicaoParcial(ctx);
+    }
+
+    @Override
+    public String visitTransicao(FAutomatonParser.TransicaoContext ctx) {
+        String estadoOrigem = ctx.NOME().getText();
+
+        // Para cada transicao partindo deste estado de origem:
+        for(int i = 0; ctx.transicaoParcial(i) != null; ++i) {
+            String simboloDeEntrada = ctx.transicaoParcial(i).SIMBOLO().getText();
+            String estadoDeDestino  = ctx.transicaoParcial(i).NOME().getText();
+
+            ai.insereTransicao(estadoOrigem, simboloDeEntrada, estadoDeDestino);
+        }
+
+        return super.visitTransicao(ctx);
     }
 
     @Override
