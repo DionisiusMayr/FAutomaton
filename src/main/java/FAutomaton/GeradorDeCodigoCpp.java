@@ -19,15 +19,19 @@ public class GeradorDeCodigoCpp extends FAutomatonBaseVisitor<String> {
         transicoes      = "";
     }
 
-    String geraCodigoCpp(String fileLocation/*, AutomatoInfo _ai*/) throws Exception {
-        //ai = _ai;
-
+    String geraCodigoCpp(String fileLocation) throws Exception {
         ANTLRInputStream  input  = new ANTLRFileStream(fileLocation);
         FAutomatonLexer   lexer  = new FAutomatonLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         FAutomatonParser  parser = new FAutomatonParser(tokens);
 
         estadoInicial = ai.getEstadoInicial();
+
+        for(String estadoFinal : ai.getEstadosFinais())
+            estadosFinais += "\testadosFinais.insert(\"" + estadoFinal + "\");\n";
+
+        for(Par<String, String> transicao : ai.getTransicoes().keySet())
+            transicoes += "\ttransicao[make_pair(\"" + transicao.a + "\", '" + transicao.b + "')] = \"" + ai.getTransicoes().get(transicao) + "\";\n";
 
         codigo += "#include <iostream>\n" +
                 "#include <set>\n" +
@@ -97,9 +101,6 @@ public class GeradorDeCodigoCpp extends FAutomatonBaseVisitor<String> {
 
         return super.visitListaSimbolos(ctx);
     }
-
-    //  foreach
-    //    estadosFinais += "\testadosFinais.insert(\"" + estado + "\");\n";
 
 //     for (String transicao : particoes) {
 //        String[] aux = transicao.split("\\-\\>");

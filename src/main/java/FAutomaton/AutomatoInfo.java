@@ -76,6 +76,10 @@ class AutomatoInfo {
         return estadosFinais;
     }
 
+    Map<Par<String, String>, String> getTransicoes() {
+        return transicoes;
+    }
+
     void insereTransicao(String estadoOrigem, String simboloDeEntrada, String estadoDeDestino) {
         Par<String, String> p = new Par<>(estadoOrigem, simboloDeEntrada);
 

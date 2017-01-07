@@ -8,8 +8,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class GeradorDeCodigoCppTest extends TestCase {
-    private AnalisadorSemantico analisadorSemantico = new AnalisadorSemantico();
-    private GeradorDeCodigoCpp geradorDeCodigoCpp = new GeradorDeCodigoCpp(analisadorSemantico.getAI());
+    private AnalisadorSemantico analisadorSemantico;
+    private GeradorDeCodigoCpp geradorDeCodigoCpp;
 
     private final String pathSemErrosSintaticos = "src/test/testCases/SemErrosSintaticos/"; //TODO mudar para "sem erros"
     private final String pathSaidasCorretas     = "src/test/testCases/SaidaCodigoCpp/";
@@ -27,38 +27,46 @@ public class GeradorDeCodigoCppTest extends TestCase {
         return outputDesejado.toString();
     }
 
+    public String geraCodigoParaTeste(String nomeArquivo) throws Exception {
+        String arquivo = pathSemErrosSintaticos + nomeArquivo;
+        analisadorSemantico = new AnalisadorSemantico();
+        analisadorSemantico.analisaArquivo(arquivo);
+        geradorDeCodigoCpp = new GeradorDeCodigoCpp(analisadorSemantico.getAI());
+        return geradorDeCodigoCpp.geraCodigoCpp(arquivo);
+    }
+
     public void testCodigoCpp1() throws Exception {
         String nomeArquivo = "s1.dfa";
-        assertEquals(leArquivo(nomeArquivo), geradorDeCodigoCpp.geraCodigoCpp(pathSemErrosSintaticos + nomeArquivo));
+        assertEquals(leArquivo(nomeArquivo), geraCodigoParaTeste(nomeArquivo));
     }
 
     public void testCodigoCpp2() throws Exception {
         String nomeArquivo = "s2.dfa";
-        assertEquals(leArquivo(nomeArquivo), geradorDeCodigoCpp.geraCodigoCpp(pathSemErrosSintaticos + nomeArquivo));
+        assertEquals(leArquivo(nomeArquivo), geraCodigoParaTeste(nomeArquivo));
     }
 
     public void testCodigoCpp3() throws Exception {
         String nomeArquivo = "s3.dfa";
-        assertEquals(leArquivo(nomeArquivo), geradorDeCodigoCpp.geraCodigoCpp(pathSemErrosSintaticos + nomeArquivo));
+        assertEquals(leArquivo(nomeArquivo), geraCodigoParaTeste(nomeArquivo));
     }
 
     public void testCodigoCpp4() throws Exception {
         String nomeArquivo = "s4.dfa";
-        assertEquals(leArquivo(nomeArquivo), geradorDeCodigoCpp.geraCodigoCpp(pathSemErrosSintaticos + nomeArquivo));
+        assertEquals(leArquivo(nomeArquivo), geraCodigoParaTeste(nomeArquivo));
     }
 
     public void testCodigoCpp5() throws Exception {
         String nomeArquivo = "s5.dfa";
-        assertEquals(leArquivo(nomeArquivo), geradorDeCodigoCpp.geraCodigoCpp(pathSemErrosSintaticos + nomeArquivo));
+        assertEquals(leArquivo(nomeArquivo), geraCodigoParaTeste(nomeArquivo));
     }
 
     public void testCodigoCpp6() throws Exception {
         String nomeArquivo = "s6.dfa";
-        assertEquals(leArquivo(nomeArquivo), geradorDeCodigoCpp.geraCodigoCpp(pathSemErrosSintaticos + nomeArquivo));
+        assertEquals(leArquivo(nomeArquivo), geraCodigoParaTeste(nomeArquivo));
     }
 
     public void testCodigoCpp7() throws Exception {
         String nomeArquivo = "s7.dfa";
-        assertEquals(leArquivo(nomeArquivo), geradorDeCodigoCpp.geraCodigoCpp(pathSemErrosSintaticos + nomeArquivo));
+        assertEquals(leArquivo(nomeArquivo), geraCodigoParaTeste(nomeArquivo));
     }
 }
