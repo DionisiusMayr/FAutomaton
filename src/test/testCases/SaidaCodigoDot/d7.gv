@@ -1,0 +1,13 @@
+digraph A7 {
+	/* configuracoes de design e layout */
+	node [shape = circle];
+	rankdir = "LR";
+
+	/* estado inicial */
+	x [style = invis];
+	x -> q1;
+
+	/* outros estados */
+	q1;
+	w1;
+}

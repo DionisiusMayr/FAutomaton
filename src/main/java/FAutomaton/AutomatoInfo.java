@@ -88,6 +88,14 @@ class AutomatoInfo {
         transicoes.put(p, estadoDeDestino);
     }
 
+    Set<String> getEstadosNaoFinais() {
+        return estadosNaoFinais;
+    }
+
+    boolean existeTransicao() {
+        return !transicoes.isEmpty();
+    }
+
     @Override
     public String toString() {
         String s = "Alfabeto:\n";

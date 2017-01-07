@@ -1,0 +1,5 @@
+digraph A6 {
+	/* configuracoes de design e layout */
+	node [shape = circle];
+	rankdir = "LR";
+}

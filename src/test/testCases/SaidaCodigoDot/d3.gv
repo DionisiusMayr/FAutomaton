@@ -1,0 +1,15 @@
+digraph A3 {
+	/* configuracoes de design e layout */
+	node [shape = circle];
+	rankdir = "LR";
+
+	/* estado inicial */
+	x [style = invis];
+	x -> s1;
+
+	/* estados finais */
+	s1 [shape = doublecircle];
+
+	/* outros estados */
+	s2;
+}

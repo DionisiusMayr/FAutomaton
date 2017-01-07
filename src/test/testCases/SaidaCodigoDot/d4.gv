@@ -1,0 +1,21 @@
+digraph A4 {
+	/* configuracoes de design e layout */
+	node [shape = circle];
+	rankdir = "LR";
+
+	/* estado inicial */
+	x [style = invis];
+	x -> s1;
+
+	/* estados finais */
+	s1 [shape = doublecircle];
+
+	/* outros estados */
+	s2;
+
+	/* transicoes */
+	s1 -> s2 [label = "0"];
+	s1 -> s1 [label = "1"];
+	s2 -> s1 [label = "0"];
+	s2 -> s2 [label = "1"];
+}
