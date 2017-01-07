@@ -28,6 +28,10 @@ class AutomatoInfo {
         alfabeto.add(simbolo);
     }
 
+    boolean existeEstado() {
+        return !estados.isEmpty() || !estadosFinais.isEmpty();
+    }
+
     boolean existeEstado(String estado) {
         return (estados.contains(estado) || estadosFinais.contains(estado));
     }

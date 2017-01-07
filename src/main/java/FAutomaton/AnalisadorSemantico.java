@@ -89,13 +89,13 @@ class AnalisadorSemantico extends FAutomatonBaseVisitor<String> {
     @Override
     public String visitListaEstados(FAutomatonParser.ListaEstadosContext ctx) {
         if(ctx.getText().equals("estados{}"))
-            warnings += getLine(ctx) + ": Automato " /*+ estado*/ + " com conjunto de estados vazio.\n";
+            warnings += getLine(ctx) + ": \'" + ai.getNome() + "\' com conjunto de estados vazio.\n";
         //TODO definir se o nome do automato sera mostrado neste warning
 
         String s = super.visitListaEstados(ctx);
 
-        if(!ai.existeEstadoFinal())
-            warnings += "Automato \'" + ai.getNome() + "\' sem estados finais.\n"; //TODO melhorar esse warning
+        if(!ai.existeEstadoFinal() && ai.existeEstado())
+            warnings += getLine(ctx) + ": \'" + ai.getNome() + "\' sem estados finais.\n"; //TODO melhorar esse warning
 
         return s;
     }
@@ -113,5 +113,15 @@ class AnalisadorSemantico extends FAutomatonBaseVisitor<String> {
             erros += getLine(ctx) + ": Estado '" + e + "' nao pertence ao conjunto de estados.\n";
 
         return super.visitTransicaoParcial(ctx);
+    }
+
+    @Override
+    public String visitListaTransicoes(FAutomatonParser.ListaTransicoesContext ctx) {
+        String s = ctx.getText();
+
+        if(s.equals("transicoes{}"))
+            warnings += getLine(ctx) + ": \'" + ai.getNome() + "\' sem transicoes.\n";
+
+        return super.visitListaTransicoes(ctx);
     }
 }
