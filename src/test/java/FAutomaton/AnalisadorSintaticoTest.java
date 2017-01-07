@@ -6,7 +6,7 @@ public class AnalisadorSintaticoTest extends TestCase {
 
     private final String pathErrosLexicos       = "src/test/testCases/ErrosLexicos/";
     private final String pathErrosSintaticos    = "src/test/testCases/ErrosSintaticos/";
-    private final String pathSemErrosSintaticos = "src/test/testCases/SemErrosSintaticos/";
+    private final String pathSemErrosSintaticos = "src/test/testCases/SemErros/";
 
     /*
         SEM ERROS

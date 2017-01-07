@@ -25,6 +25,7 @@ public class GeradorDeCodigoCpp extends FAutomatonBaseVisitor<String> {
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         FAutomatonParser  parser = new FAutomatonParser(tokens);
 
+        System.out.println(ai);
         estadoInicial = ai.getEstadoInicial();
 
         for(String estadoFinal : ai.getEstadosFinais())
@@ -101,8 +102,4 @@ public class GeradorDeCodigoCpp extends FAutomatonBaseVisitor<String> {
 
         return super.visitListaSimbolos(ctx);
     }
-
-//     for (String transicao : particoes) {
-//        String[] aux = transicao.split("\\-\\>");
-//        transicoes += "\ttransicao[make_pair(\"" + estadoSaida + "\", '" + aux[0] + "')] = \"" + aux[1] + "\";\n";
 }

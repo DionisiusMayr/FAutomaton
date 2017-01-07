@@ -1,13 +1,10 @@
 package FAutomaton;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 class AutomatoInfo {
     private Set<String> alfabeto;
-    private Set<String> estados;
+    private Set<String> estadosNaoFinais;
     private Set<String> estadosFinais;
     private String      estadoInicial;
     private String      nomeDoAutomato;
@@ -18,12 +15,17 @@ class AutomatoInfo {
     }
 
     AutomatoInfo(String nome) {
-        alfabeto       = new HashSet<>();
-        estados        = new HashSet<>();
-        estadosFinais  = new HashSet<>();
-        estadoInicial  = "";
-        nomeDoAutomato = nome;
-        transicoes     = new HashMap<>();
+        alfabeto         = new HashSet<>();
+        estadosNaoFinais = new HashSet<>();
+        estadosFinais    = new HashSet<>();
+        estadoInicial    = "";
+        nomeDoAutomato   = nome;
+
+        // Para passar nos testes, é necessário utilizar sempre a mesma ordem para as Collections, e por isso foi
+            // escolhida a estrutura de TreeSet ao invés de HashSet,
+        // (HashMap é uma collection unordered, então a cada execução é gerado um resultado com ordem diferente.)
+        // NOTE: Isso não impacta em absolutamente nada o código C, foi utilizado apenas para facilitar o desenvolvimento.
+        transicoes     = new TreeMap<>();
     }
 
     boolean existeSimbolo(String simbolo) {
@@ -35,15 +37,15 @@ class AutomatoInfo {
     }
 
     boolean existeEstado() {
-        return !estados.isEmpty() || !estadosFinais.isEmpty();
+        return !estadosNaoFinais.isEmpty() || !estadosFinais.isEmpty();
     }
 
     boolean existeEstado(String estado) {
-        return (estados.contains(estado) || estadosFinais.contains(estado));
+        return (estadosNaoFinais.contains(estado) || estadosFinais.contains(estado));
     }
 
     void insereEstado(String estado) {
-        estados.add(estado);
+        estadosNaoFinais.add(estado);
     }
 
     void insereEstadoFinal(String estado) {
@@ -92,8 +94,8 @@ class AutomatoInfo {
         for(String ss : alfabeto)
             s += ss + " ";
 
-        s += "\nEstados:\n";
-        for(String ss : estados)
+        s += "\nEstados Nao Finais:\n";
+        for(String ss : estadosNaoFinais)
             s += ss + " ";
 
         s += "\nEstados Finais:\n";
