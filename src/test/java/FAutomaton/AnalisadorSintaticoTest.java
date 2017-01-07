@@ -43,12 +43,6 @@ public class AnalisadorSintaticoTest extends TestCase {
         assertEquals("", analisadorSintatico.analisaArquivo(pathSemErrosSintaticos + "s6.dfa"));
     }
 
-    // Testa um autômato com estados de uma única letra
-    // Note: Nào é mais aceito um estado com uma única letra
-//    public void testSemErro7() throws Exception {
-//        assertEquals(analisadorSintatico.analisaArquivo(pathSemErrosSintaticos + "s7.dfa"), "");
-//    }
-
     /*
         COM ERROS LÉXICOS
         Espera-se que o compilador retorne uma string informando a linha onde ocorre o erro e qual símbolo está causando este erro léxico.
@@ -79,7 +73,9 @@ public class AnalisadorSintaticoTest extends TestCase {
         assertEquals("7: Erro lexico: $ - simbolo nao identificado\n", analisadorSintatico.analisaArquivo(pathErrosLexicos + "l5.dfa"));
     }
 
-    //TODO Nome de automato invalido
+    public void testComErroLexico6() throws Exception {
+        assertEquals("1: Erro lexico: @ - simbolo nao identificado\n", analisadorSintatico.analisaArquivo(pathErrosLexicos + "l6.dfa"));
+    }
 
     /*
         COM ERROS SINTÁTICOS
