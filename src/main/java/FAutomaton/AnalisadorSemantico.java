@@ -19,10 +19,6 @@ class AnalisadorSemantico extends FAutomatonBaseVisitor<String> {
 
         visit(parser.automato());
 
-        // TODO remover essas duas linhas, somente debug
-        System.out.println("Warnings:\n" + warnings);
-        System.out.println("Erros:\n" + erros);
-
         return new Par(erros, warnings);
     }
 
