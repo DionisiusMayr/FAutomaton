@@ -1,8 +1,10 @@
 package FAutomaton;
 
-import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.ANTLRFileStream;
+import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CommonTokenStream;
 
-public class GeradorDeCodigoCpp extends FAutomatonBaseVisitor<String> {
+class GeradorDeCodigoCpp extends FAutomatonBaseVisitor<String> {
     private String          codigo;
     private String          alfabeto;
     private String          estadoInicial;

@@ -1,8 +1,9 @@
 package FAutomaton;
 
-import org.antlr.v4.runtime.*;
-
-import java.util.ArrayList;
+import org.antlr.v4.runtime.ANTLRFileStream;
+import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.ParserRuleContext;
 
 class AnalisadorSemantico extends FAutomatonBaseVisitor<String> {
     private String          erros       = "";
@@ -19,7 +20,7 @@ class AnalisadorSemantico extends FAutomatonBaseVisitor<String> {
 
         visit(parser.automato());
 
-        return new Par(erros, warnings);
+        return new Par<>(erros, warnings);
     }
 
     AutomatoInfo getAI() {

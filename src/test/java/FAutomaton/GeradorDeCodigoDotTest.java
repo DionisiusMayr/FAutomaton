@@ -3,8 +3,8 @@ package FAutomaton;
 import junit.framework.TestCase;
 
 import java.io.File;
-import java.nio.file.Files;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.List;
 
 public class GeradorDeCodigoDotTest extends TestCase {
