@@ -31,15 +31,14 @@ public class Main {
 
                     // Gera código c++ para o arquivo.cpp
                     GeradorDeCodigoCpp gcpp = new GeradorDeCodigoCpp(semantico.getAI());
-                    FileWriter fw = new FileWriter("/" + arquivo.substring(0, arquivo.length() - 4) + ".cpp");
-                    PrintWriter pwcpp = new PrintWriter(fw);
+                    PrintWriter pwcpp = new PrintWriter(new FileWriter(arquivo.substring(0, arquivo.length() - 4) + ".cpp"));
                     pwcpp.print(gcpp.geraCodigoCpp(arquivo));
                     pwcpp.flush();
                     pwcpp.close();
 
                     // Gera código dot para o arquivo.gv
                     GeradorDeCodigoDot gdot = new GeradorDeCodigoDot(semantico.getAI());
-                    PrintWriter pwdot = new PrintWriter(new FileWriter("/" + arquivo.substring(0, arquivo.length() - 4) + ".gv"));
+                    PrintWriter pwdot = new PrintWriter(new FileWriter(arquivo.substring(0, arquivo.length() - 4) + ".gv"));
                     pwdot.print(gdot.geraCodigoDot(arquivo));
                     pwdot.flush();
                     pwdot.close();
