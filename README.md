@@ -170,6 +170,25 @@ E a seguinte imagem (gerada pelo *graphviz*):
 
 ![E1](/exemplos/e1.png?raw=true "Autômato E1")
 
+Tal autômato reconhece qualquer cadeia que possua a subcadeia "1010".
+
+Após compilar o código C++, poderíamos executá-lo resultando nas seguintes saídas:
+
+    1011
+    Rejeita: A cadeia 1011 nao pertence a linguagem.
+
+    10101010
+    Aceita: A cadeia 10101010 pertence a linguagem.
+
+    1111101110
+    Rejeita: A cadeia 1111101110 nao pertence a linguagem.
+
+    1010a
+    Rejeita: A cadeia 1010a nao pertence a linguagem.
+
+## Melhorias futuras:
+- [ ] Implementar o algoritmo para conversão de autômatos finitos não determiníticos para determinísticos. (Toda a parte de geração de código funcionaria perfeitamente já)
+
 [ANTLR]: http://www.antlr.org/
 [JUnit]: http://junit.org/junit4/
 [Maven]: https://maven.apache.org/

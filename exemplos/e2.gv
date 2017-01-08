@@ -1,0 +1,40 @@
+digraph E2 {
+	/* configuracoes de design e layout */
+	node [shape = circle];
+	rankdir = "LR";
+
+	/* estado inicial */
+	x [style = invis];
+	x -> q1;
+
+	/* estados finais */
+	q6 [shape = doublecircle];
+	q5 [shape = doublecircle];
+	q4 [shape = doublecircle];
+	q3 [shape = doublecircle];
+	q9 [shape = doublecircle];
+
+	/* outros estados */
+	q8;
+	q7;
+	q2;
+	q1;
+
+	/* transicoes */
+	q1 -> q2 [label = "a"];
+	q1 -> q7 [label = "b"];
+	q2 -> q3 [label = "a"];
+	q2 -> q7 [label = "b"];
+	q3 -> q3 [label = "a"];
+	q3 -> q4 [label = "b"];
+	q4 -> q3 [label = "a"];
+	q4 -> q5 [label = "b"];
+	q5 -> q3 [label = "a"];
+	q5 -> q6 [label = "b"];
+	q6 -> q3 [label = "a"];
+	q6 -> q7 [label = "b"];
+	q7 -> q8 [label = "a"];
+	q7 -> q7 [label = "b"];
+	q8 -> q9 [label = "a"];
+	q8 -> q7 [label = "b"];
+}

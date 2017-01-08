@@ -1,0 +1,17 @@
+automato E2 {
+    alfabeto { a, b }
+
+    estados { q1, q2, q3*, q4*, q5*, q6*, q7, q8, q9* }
+
+    transicoes {
+            q1 { a -> q2, b -> q7 }
+            q2 { a -> q3, b -> q7 }
+            q3 { a -> q3, b -> q4 }
+            q4 { a -> q3, b -> q5 }
+            q5 { a -> q3, b -> q6 }
+            q6 { a -> q3, b -> q7 }
+            q7 { a -> q8, b -> q7 }
+            q8 { a -> q9, b -> q7 }
+        }
+    }
+}
