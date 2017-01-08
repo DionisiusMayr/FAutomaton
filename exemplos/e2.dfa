@@ -12,6 +12,5 @@ automato E2 {
             q6 { a -> q3, b -> q7 }
             q7 { a -> q8, b -> q7 }
             q8 { a -> q9, b -> q7 }
-        }
     }
 }

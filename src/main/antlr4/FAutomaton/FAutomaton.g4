@@ -11,7 +11,7 @@ options {
     }
 }
 
-automato		: 'automato' NOME '{' alfabeto listaEstados listaTransicoes '}';
+automato		: 'automato' NOME '{' alfabeto listaEstados listaTransicoes '}' EOF;
 
 /*** Alfabeto ***/
 alfabeto		: 'alfabeto' '{' listaSimbolos '}';

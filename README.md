@@ -37,16 +37,16 @@ Para compilar o código C++ basta especificar que a versão utilizada é a **ver
 
     g++ -std=c++11    /path_para_o_aquivo/s1.dfa
 
-Para gerar uma imagem *.png* a partir do *.gv* basta executar 
+Para gerar uma imagem *.png* a partir do *.gv* basta executar
 
     dot -Tpng    /path_para_o_aquivo/s1.gv    >    /path_para_o_aquivo/s1.png
 
 
 ## Casos de Teste
-Utiliza-se a ferramenta **[JUnit]** para fazer os **62** testes automatizados, encontrados na pasta *src/test/*.
+Utiliza-se a ferramenta **[JUnit]** para fazer os **64** testes automatizados, encontrados na pasta *src/test/*.
 Tais testes são subdivididos em:
 - 6 testes para erros léxicos
-- 18 testes para erros sintáticos
+- 20 testes para erros sintáticos
 - 18 testes para erros semânticos
 - 7 testes para geração de código C++
 - 7 testes para geração de código Dot
@@ -61,9 +61,9 @@ Para a seguinte descrição:
 
     automato E1 {
         alfabeto {0, 1}
-    
+
         estados {q1, q2, q3, q4, q5*}
-    
+
         transicoes {
                 q1 { 0 -> q1, 1 -> q2 }
                 q2 { 0 -> q3, 1 -> q2 }
@@ -138,20 +138,20 @@ O seguinte arquivo *.gv*:
         /* configuracoes de design e layout */
         node [shape = circle];
         rankdir = "LR";
-    
+
         /* estado inicial */
         x [style = invis];
         x -> q1;
-    
+
         /* estados finais */
         q5 [shape = doublecircle];
-    
+
         /* outros estados */
         q2;
         q1;
         q4;
         q3;
-    
+
         /* transicoes */
         q1 -> q1 [label = "0"];
         q1 -> q2 [label = "1"];

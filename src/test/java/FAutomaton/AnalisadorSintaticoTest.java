@@ -171,4 +171,14 @@ public class AnalisadorSintaticoTest extends TestCase {
     public void testComErroSintatico18() throws Exception {
         assertEquals("19 : Erro sintatico proximo a '}'\n", analisadorSintatico.analisaArquivo(pathErrosSintaticos + "s18.dfa"));
     }
+
+    // Uma chave a mais
+    public void testComErroSintatico19() throws Exception {
+        assertEquals("13 : Erro sintatico proximo a '}'\n", analisadorSintatico.analisaArquivo(pathErrosSintaticos + "s19.dfa"));
+    }
+
+    // Texto escrito fora de comentário no final
+    public void testComErroSintatico20() throws Exception {
+        assertEquals("13 : Erro sintatico proximo a '}'\n", analisadorSintatico.analisaArquivo(pathErrosSintaticos + "s19.dfa"));
+    }
 }
