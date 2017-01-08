@@ -1,4 +1,4 @@
-// Esboço da gramática para a linguagem FAutomaton.
+// Gramática da linguagem FAutomaton.
 grammar FAutomaton;
 
 options {
@@ -19,9 +19,9 @@ alfabeto		: 'alfabeto' '{' listaSimbolos '}';
 listaSimbolos	: (SIMBOLO (',' SIMBOLO)*)?;
 
 /*** Estados ***/
-listaEstados	: 'estados' '{' (estadoInicial = estadoSF (',' estadoSF)*)? '}';  // É possível não ter nenhum estado,
-                                                                  // mas tendo ao menos um estado é obrigatório ter também um estado inicial
-                                                                  // (aqui o estado inicial é sempre o primeiro estado definido, que pode também ser um estado final).
+listaEstados	: 'estados' '{' (estadoInicial = estadoSF (',' estadoSF)*)? '}';
+// É possível não ter nenhum estado, mas tendo ao menos um estado é obrigatório ter também um estado inicial
+// (aqui o estado inicial é sempre o primeiro estado definido, que pode também ser um estado final).
 
 estadoSF		: estadoSimples
 				| estadoFinal;
