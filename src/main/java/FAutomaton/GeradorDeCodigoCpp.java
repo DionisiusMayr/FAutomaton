@@ -1,10 +1,6 @@
 package FAutomaton;
 
-import org.antlr.v4.runtime.ANTLRFileStream;
-import org.antlr.v4.runtime.ANTLRInputStream;
-import org.antlr.v4.runtime.CommonTokenStream;
-
-class GeradorDeCodigoCpp extends FAutomatonBaseVisitor<String> {
+class GeradorDeCodigoCpp {
     private String          codigo;
     private String          alfabeto;
     private String          estadoInicial;
@@ -14,54 +10,48 @@ class GeradorDeCodigoCpp extends FAutomatonBaseVisitor<String> {
 
     GeradorDeCodigoCpp(AutomatoInfo a) {
         ai              = a;    // Recebe todas as informações necessárias a respeito do autômato.
+        estadoInicial   = ai.getEstadoInicial();
         codigo          = "";
         alfabeto        = "";
-        estadoInicial   = "";
         estadosFinais   = "";
         transicoes      = "";
     }
 
-    String geraCodigoCpp(String fileLocation) throws Exception {
-        ANTLRInputStream  input  = new ANTLRFileStream(fileLocation);
-        FAutomatonLexer   lexer  = new FAutomatonLexer(input);
-        CommonTokenStream tokens = new CommonTokenStream(lexer);
-        FAutomatonParser  parser = new FAutomatonParser(tokens);
+    private void gerarCodigosParciais() {
+        /* Alfabeto */
+        for(String simbolo : ai.getAlfabeto())
+            alfabeto += "\talfabeto.insert('" + simbolo + "');\n";
 
-        estadoInicial = ai.getEstadoInicial();
-
+        /* Estados finais */
         for(String estadoFinal : ai.getEstadosFinais())
             estadosFinais += "\testadosFinais.insert(\"" + estadoFinal + "\");\n";
 
+        /* Transições */
         for(Par<String, String> transicao : ai.getTransicoes().keySet())
             transicoes += "\ttransicao[make_pair(\"" + transicao.a + "\", '" + transicao.b + "')] = \"" + ai.getTransicoes().get(transicao) + "\";\n";
+    }
 
-        codigo += "#include <iostream>\n" +
-                "#include <set>\n" +
-                "#include <map>\n" +
-                "\n" +
-                "using namespace std;\n" +
-                "\n" +
+    String geraCodigoCpp(String fileLocation) throws Exception {
+
+        gerarCodigosParciais();
+
+        codigo += "#include <iostream>\n#include <set>\n#include <map>\n\n" +
+                "using namespace std;\n\n" +
                 "int main() {\n" +
                 "\tbool \t\trecusa = false;\n" +
                 "\tset<char> \talfabeto;\n" +
                 "\tset<string>\testadosFinais;\n" +
                 "\tstring \t\testadoAtual;\n" +
-                "\tmap<pair<string, char>, string> transicao;\n" +
-                "\n" +
+                "\tmap<pair<string, char>, string> transicao;\n\n" +
                 "\t/* Le a fita de entrada */\n" +
                 "\tstring entrada;\n" +
                 "\tcin >> entrada;\n\n";
 
-        codigo += "\t/* Simbolos do alfabeto */\n";
-
-        visit(parser.automato());
-
-        codigo += alfabeto + "\n";
+        //alfabeto
+        codigo += "\t/* Simbolos do alfabeto */\n" + alfabeto + "\n";
 
         //estado inicial
-        codigo += "\t/* Estado inicial */\n" +
-                "\testadoAtual = \"" + estadoInicial + "\";\n" +
-                "\n";
+        codigo += "\t/* Estado inicial */\n\testadoAtual = \"" + estadoInicial + "\";\n\n";
 
         //conjunto de estados finais
         codigo += "\t/* Conjunto de estados finais */\n" + estadosFinais + "\n";
@@ -79,28 +69,14 @@ class GeradorDeCodigoCpp extends FAutomatonBaseVisitor<String> {
                 "\t\telse {\n" +
                 "\t\t\t/* Símbolo lido nao pertencente ao alfabeto ou transicao nao definida */\n" +
                 "\t\t\trecusa = true;\n" +
-                "\t\t\tbreak;\n" +
-                "\t\t}\n" +
-                "\t}\n" +
-                "\n" +
+                "\t\t\tbreak;\n\t\t}\n\t}\n\n" +
                 "\tif(recusa || (estadosFinais.find(estadoAtual) == estadosFinais.cend()))\n" +
                 "\t\tcout << \"Rejeita: A cadeia \" << entrada << \" nao pertence a linguagem.\" << endl;\n" +
                 "\telse\n" +
                 "\t\tcout << \"Aceita: A cadeia \" << entrada << \" pertence a linguagem.\" << endl;\n";
 
-        codigo += "\n\treturn 0;\n" +
-                "}\n";
+        codigo += "\n\treturn 0;\n}\n";
 
         return codigo;
-    }
-
-    @Override
-    public String visitListaSimbolos(FAutomatonParser.ListaSimbolosContext ctx) {
-        String[] simbolos = ctx.getText().split(",");
-        for(String simbolo : simbolos) {
-            alfabeto += "\talfabeto.insert('" + simbolo + "');\n";
-        }
-
-        return super.visitListaSimbolos(ctx);
     }
 }

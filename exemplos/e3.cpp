@@ -16,8 +16,8 @@ int main() {
 	cin >> entrada;
 
 	/* Simbolos do alfabeto */
-	alfabeto.insert('0');
 	alfabeto.insert('1');
+	alfabeto.insert('0');
 
 	/* Estado inicial */
 	estadoAtual = "q0";
