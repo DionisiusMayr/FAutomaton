@@ -87,8 +87,6 @@ class AnalisadorSemantico extends FAutomatonBaseVisitor<String> {
         return super.visitEstadoFinal(ctx);
     }
 
-    //TODO gerar um warning em listaEstados para lista de estados vazia e determinar o estado inicial
-
     @Override
     public String visitListaEstados(FAutomatonParser.ListaEstadosContext ctx) {
         if(ctx.getText().equals("estados{}"))
@@ -102,12 +100,11 @@ class AnalisadorSemantico extends FAutomatonBaseVisitor<String> {
         String s = super.visitListaEstados(ctx);
 
         if(!ai.existeEstadoFinal() && ai.existeEstado())
-            warnings += getLine(ctx) + ": \'" + ai.getNome() + "\' sem estados finais.\n"; //TODO melhorar esse warning
+            warnings += getLine(ctx) + ": \'" + ai.getNome() + "\' sem estados finais.\n";
 
         return s;
     }
 
-    //TODO verificar como fica quando o alfabeto vem depois das transicoes
     @Override
     public String visitTransicaoParcial(FAutomatonParser.TransicaoParcialContext ctx) {
         String s = ctx.SIMBOLO().getText();
