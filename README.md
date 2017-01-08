@@ -186,8 +186,10 @@ Após compilar o código C++, poderíamos executá-lo resultando nas seguintes s
     1010a
     Rejeita: A cadeia 1010a nao pertence a linguagem.
 
-## Melhorias futuras:
-- [ ] Implementar o algoritmo para conversão de autômatos finitos não determiníticos para determinísticos. (Toda a parte de geração de código funcionaria perfeitamente já)
+## Possíveis melhorias:
+- [ ] Implementar o algoritmo para conversão de autômatos finitos não determiníticos para determinísticos. (Toda a parte de geração de código já funcionaria perfeitamente);
+- [ ] Tentar gerar o *.png* automaticamente;
+- [ ] Compilar o código c++ automaticamente.
 
 [ANTLR]: http://www.antlr.org/
 [JUnit]: http://junit.org/junit4/
