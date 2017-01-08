@@ -12,8 +12,6 @@ public class GeradorDeCodigoDot {
     }
 
     String geraCodigoDot(String fileLocation) throws Exception {
-        System.out.println(ai.toString());
-
         codigo += "digraph " + ai.getNome() + " {\n";
 
         codigo += "\t/* configuracoes de design e layout */\n" +

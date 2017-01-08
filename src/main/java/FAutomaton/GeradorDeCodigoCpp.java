@@ -25,7 +25,6 @@ public class GeradorDeCodigoCpp extends FAutomatonBaseVisitor<String> {
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         FAutomatonParser  parser = new FAutomatonParser(tokens);
 
-        System.out.println(ai);
         estadoInicial = ai.getEstadoInicial();
 
         for(String estadoFinal : ai.getEstadosFinais())
