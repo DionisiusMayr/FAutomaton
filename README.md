@@ -1,4 +1,4 @@
-# Compilador para a Linguagem FAutomaton
+# Compilador para a Linguagem [FAutomaton]
 O compilador aqui implementado parte de uma representação de um **autômato finito determinístico** para gerar código **C++** para reconhecer a linguagem aceita pelo autômato e também código **dot** para visualizá-lo.
 
 ## Implementação
@@ -196,3 +196,4 @@ Após compilar o código C++, poderíamos executá-lo resultando nas seguintes s
 [Maven]: https://maven.apache.org/
 [Graphviz]: http://www.graphviz.org/
 [WebGraphviz]: http://www.webgraphviz.com/
+[FAutomaton]: https://github.com/DionisiusMayr/FAutomaton
