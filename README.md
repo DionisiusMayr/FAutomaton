@@ -1,3 +1,5 @@
+![LOGO](/logo.png?raw=true "Logo")
+
 # Compilador para a Linguagem [FAutomaton]
 O compilador aqui implementado parte de uma representação de um **autômato finito determinístico** para gerar código **C++** para reconhecer a linguagem aceita pelo autômato e também código **dot** para visualizá-lo.
 
@@ -26,6 +28,10 @@ Com o *maven* instalado, não é necessário baixar mais nenhuma dependência, o
     mvn package
 
 e então o *jar* e o *fat jar* serão gerados no diretório *./target* com os nomes *FAutomaton-1.1.jar* e *FAutomaton-1.1-jar-with-dependencies.jar*, respectivamente.
+
+Caso necessário, pode-se gerar os *jars* utilizando a flag -DskipTests do Maven, para pular os testes.
+
+    mvn package -DskipTests
 
 ### Utilizando o Compilador
 Para utilizar o compilador basta passar como argumento para o *jar* o arquivo *.dfa*:

@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 
 public class Main {
+
     public static void main(String[] args) throws Exception {
         String arquivo = args[0];  // Recebe o nome do arquivo a ser analisado como primeiro parâmetro.
         if(!arquivo.endsWith(".dfa"))
